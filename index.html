@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Be My Valentine? 💙</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            /* Background changed to Light Sky Blue */
+            background-color: #87CEFA; 
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            touch-action: none;
+        }
+
+        .container {
+            text-align: center;
+            width: 100%;
+            z-index: 2;
+        }
+
+        #main-gif {
+            width: 150px;
+            height: auto;
+            border-radius: 15px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            color: #0056b3;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        #yesBtn {
+            background-color: #007bff;
+            color: white;
+            z-index: 999;
+        }
+
+        #noBtn {
+            background-color: #f8f9fa;
+            color: #333;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <img id="main-gif" src="https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyMm4wcm55MWlkc3pxeGwxZ2Z1Y2Z1a3NiZTFvNGY3ZzdsYWc2NzJ3NyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/USFBeBYAY076m5KcKR/giphy.gif" alt="Cute Panda">
+        
+        <h1 id="question">Will you be my Valentine? 💙</h1>
+        
+        <div class="buttons">
+            <button id="yesBtn">Yes!</button>
+            <button id="noBtn">No</button>
+        </div>
+    </div>
+
+    <script>
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const question = document.getElementById('question');
+        const mainGif = document.getElementById('main-gif');
+
+        let yesFontSize = 1.1;
+
+        // List of begging GIFs when she taps No
+        const beggingGifs = [
+            "https://media.giphy.com/media/QrPgEKEmKIY6tlPtIT/giphy.gif",
+            "https://media.giphy.com/media/cHXImoCPlb7py2lWjU/giphy.gif",
+            "https://media.giphy.com/media/1NjbFp5CxPYSNFoRce/giphy.gif"
+        ];
+
+        function handleNoInteraction() {
+            // 1. Move the No button
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+
+            // 2. Make the Yes button bigger
+            yesFontSize += 0.4;
+            yesBtn.style.fontSize = yesFontSize + 'rem';
+            yesBtn.style.padding = (yesFontSize * 10) + 'px ' + (yesFontSize * 20) + 'px';
+            
+            // 3. Change to a random begging GIF
+            const randomGif = beggingGifs[Math.floor(Math.random() * beggingGifs.length)];
+            mainGif.src = randomGif;
+
+            // 4. Update the text
+            const phrases = ["Are you sure?", "Pleeaseeee", "Pleaseeeeee...", "Pleaseeeeee", "Pleaseeeeee"];
+            noBtn.innerText = phrases[Math.floor(Math.random() * phrases.length)];
+        }
+
+        noBtn.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            handleNoInteraction();
+        });
+
+        noBtn.addEventListener('mouseover', handleNoInteraction);
+
+        // Success Action
+        yesBtn.addEventListener('click', () => {
+            question.innerHTML = "I knew you'd say YES!😭 I love you so much babiboobear!😭🥰";
+            
+            // Your specific requested Giphy for the "Yes" screen
+            mainGif.src = "https://media.giphy.com/media/KmxmoHUGPDjfQXqGgv/giphy.gif";
+            
+            noBtn.style.display = 'none';
+            yesBtn.style.fontSize = "1.2rem";
+            yesBtn.style.padding = "15px 30px";
+            yesBtn.innerText = "yey!😭";
+        });
+    </script>
+</body>
+</html>
